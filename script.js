@@ -24,7 +24,25 @@ async function updateCounter() {
 
   const spotsLeft = Math.max(MAX_SPOTS - count, 0)
 
-  spotsLeftElement.textContent = spotsLeft
+  if (spotsLeft <= 0) {
+
+    const counterWrapper = document.querySelector('.counter-wrapper')
+
+    counterWrapper.innerHTML = `
+      <p class="waitlist-message">
+        The First 100 have been locked in.
+        <br><br>
+        You can still join the waitlist below.
+        <br><br>
+        If demand is strong enough, we may expand access to the First Steps challenge.
+      </p>
+    `
+
+  } else {
+
+    spotsLeftElement.textContent = spotsLeft
+
+  }
 }
 
 updateCounter()
