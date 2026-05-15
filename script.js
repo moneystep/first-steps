@@ -59,6 +59,7 @@ form.addEventListener('submit', async (e) => {
   const state = formData.get('state')
   const phone = formData.get('phone')
   const social = formData.get('social')
+  const platform = formData.get('platform')
 
   const { error } = await supabase
     .from('waitlist')
@@ -69,7 +70,8 @@ form.addEventListener('submit', async (e) => {
         city,
         state,
         phone,
-        social
+        social,
+        platform
       }
     ])
 
@@ -79,7 +81,11 @@ form.addEventListener('submit', async (e) => {
     return
   }
 
-  successMessage.textContent = 'You secured your spot.'
+  successMessage.innerHTML = `
+    You secured your spot.
+    <br><br>
+    We'll let you know when the platform is ready for download.
+  `
 
   form.reset()
 

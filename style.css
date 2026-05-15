@@ -101,6 +101,38 @@ h1 {
   gap: 14px;
 }
 
+.platform-section {
+  text-align: left;
+  margin-top: 4px;
+}
+
+.platform-label {
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.platform-options {
+  display: flex;
+  gap: 24px;
+}
+
+.platform-options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.platform-options input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  accent-color: white;
+}
+
 /* =========================
    INPUTS
 ========================= */
