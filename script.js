@@ -84,7 +84,7 @@ form.addEventListener('submit', async (e) => {
   successMessage.innerHTML = `
     You secured your spot.
     <br><br>
-    We'll let you know when the app is ready for download.
+    Keep an eye on your inbox. We'll email instructions from hello@moneystep.app closer to the challenge start date.
   `
 
   form.reset()
