@@ -115,6 +115,7 @@ h1 {
 .platform-options {
   display: flex;
   gap: 24px;
+  justify-content: center;
 }
 
 .platform-options label {
