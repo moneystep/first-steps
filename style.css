@@ -107,7 +107,7 @@ h1 {
 }
 
 .platform-label {
-  margin-bottom: 28px;
+  margin-bottom: 14px;
   font-size: 0.95rem;
   opacity: 0.9;
 }
@@ -127,6 +127,29 @@ h1 {
 }
 
 .platform-options input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  accent-color: white;
+}
+
+.identity-options {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.identity-options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.identity-options input[type="radio"] {
   width: 18px;
   height: 18px;
   margin: 0;

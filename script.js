@@ -60,6 +60,7 @@ form.addEventListener('submit', async (e) => {
   const phone = formData.get('phone')
   const social = formData.get('social')
   const platform = formData.get('platform')
+  const identity = formData.get('identity')
 
   const { error } = await supabase
     .from('waitlist')
@@ -71,7 +72,8 @@ form.addEventListener('submit', async (e) => {
         state,
         phone,
         social,
-        platform
+        platform,
+        identity
       }
     ])
 
