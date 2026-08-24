@@ -295,6 +295,10 @@ button:hover {
   opacity: 0.7;
 }
 
+.step-green {
+  color: #8cff95;
+}
+
 /* =========================
    SOCIAL ICONS
 ========================= */
