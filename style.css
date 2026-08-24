@@ -1,6 +1,9 @@
 /* =========================
    RESET
 ========================= */
+html {
+  scroll-behavior: smooth;
+}
 
 * {
   margin: 0;
@@ -64,6 +67,22 @@ body {
 
 .learn-more a:hover {
   opacity: 1;
+}
+
+.back-to-signup {
+  margin-top: 28px;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+.back-to-signup a {
+  color: #fff;
+  text-decoration: none;
+  opacity: 0.9;
+}
+
+.back-to-signup a:hover {
+  opacity: 0.7;
 }
 
 /* =========================
