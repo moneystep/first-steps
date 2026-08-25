@@ -94,3 +94,22 @@ form.addEventListener('submit', async (e) => {
   updateCounter()
 
 })
+
+const leaderboardLink = document.getElementById('leaderboard-link')
+const leaderboardModal = document.getElementById('leaderboard-modal')
+const modalClose = document.querySelector('.modal-close')
+
+leaderboardLink.addEventListener('click', (e) => {
+  e.preventDefault()
+  leaderboardModal.classList.add('show')
+})
+
+modalClose.addEventListener('click', () => {
+  leaderboardModal.classList.remove('show')
+})
+
+leaderboardModal.addEventListener('click', (e) => {
+  if (e.target === leaderboardModal) {
+    leaderboardModal.classList.remove('show')
+  }
+})

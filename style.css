@@ -324,3 +324,47 @@ button:hover {
 /* =========================
    MOBILE
 ========================= */
+
+/* =========================
+   LEADERBOARD MODAL
+========================= */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-image {
+  max-width: 98%;
+  max-height: 95vh;
+  border-radius: 12px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: white;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+#leaderboard-link {
+  color: #FFD700;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+#leaderboard-link:hover {
+  opacity: 0.8;
+}
