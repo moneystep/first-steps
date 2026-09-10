@@ -30,11 +30,13 @@ async function updateCounter() {
 
     counterWrapper.innerHTML = `
       <p class="waitlist-message">
-        The First 100 have been locked in.
+        The first 100 spots have been claimed.
         <br><br>
-        You can still join the waitlist below.
+        <strong>You can still join the waitlist below.</strong>
         <br><br>
-        If demand is strong enough, we may expand access to the First Steps challenge.
+        If demand is strong, we may expand access to Beta 2. If we do, you'll be among the first people we contact. 
+        <br><br>
+        Otherwise, we'll keep you updated on the official Moneystep launch.
       </p>
     `
 
