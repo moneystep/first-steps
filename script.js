@@ -1,4 +1,3 @@
-```javascript
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
 const SUPABASE_URL = 'https://tfhtaqdbqfmuntwdszzj.supabase.co'
@@ -29,7 +28,7 @@ async function updateCounter() {
     })
 
   if (error) {
-    console.error(error)
+    console.error('Counter error:', error)
     return
   }
 
@@ -75,7 +74,7 @@ form.addEventListener('submit', async (e) => {
 
   if (error) {
 
-    console.error(error)
+    console.error('Supabase error:', error)
 
     successMessage.textContent =
       'Something went wrong. Please try again.'
@@ -100,9 +99,7 @@ form.addEventListener('submit', async (e) => {
    LEADERBOARD MODAL
 ========================= */
 
-const leaderboardLink = document.getElementById('leaderboard-link')
-const leaderboardLinkFaq = document.getElementById('leaderboard-link-faq')
-
+const leaderboardLinks = document.querySelectorAll('.leaderboard-link')
 const leaderboardModal = document.getElementById('leaderboard-modal')
 const modalClose = document.querySelector('.modal-close')
 
@@ -115,9 +112,11 @@ function openLeaderboard(e) {
 }
 
 
-leaderboardLink.addEventListener('click', openLeaderboard)
+leaderboardLinks.forEach((link) => {
 
-leaderboardLinkFaq.addEventListener('click', openLeaderboard)
+  link.addEventListener('click', openLeaderboard)
+
+})
 
 
 modalClose.addEventListener('click', () => {
@@ -136,4 +135,14 @@ leaderboardModal.addEventListener('click', (e) => {
   }
 
 })
-```
+
+
+document.addEventListener('keydown', (e) => {
+
+  if (e.key === 'Escape') {
+
+    leaderboardModal.classList.remove('show')
+
+  }
+
+})

@@ -324,6 +324,35 @@ button:hover {
 }
 
 /* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+  body {
+    padding: 20px;
+  }
+
+  .logo {
+    width: 330px;
+    max-width: 90vw;
+  }
+
+  .row {
+    gap: 14px;
+  }
+
+}
+
+@media (max-width: 360px) {
+
+  .logo {
+    width: 290px;
+  }
+
+}
+
+/* =========================
    LEADERBOARD MODAL
 ========================= */
 
@@ -357,14 +386,12 @@ button:hover {
   cursor: pointer;
 }
 
-#leaderboard-link,
-#leaderboard-link-faq {
+.leaderboard-link {
   color: #FFD700;
   text-decoration: none;
   font-weight: 600;
 }
 
-#leaderboard-link:hover,
-#leaderboard-link-faq:hover {
+.leaderboard-link:hover {
   opacity: 0.8;
 }
