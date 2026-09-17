@@ -1,53 +1,47 @@
+```javascript
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
 const SUPABASE_URL = 'https://tfhtaqdbqfmuntwdszzj.supabase.co'
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRmaHRhcWRicWZtdW50d2RzenpqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2MTc1MDYsImV4cCI6MjA5NDE5MzUwNn0.eWluoqyPr74jpa7yhMAEwPru7hsTIr7sk44CAsPWNC8'
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRmaHRhcWRicWZtd2RzenpqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2MTc1MDYsImV4cCI6MjA5NDE5MzUwNn0.eWluoqyPr74jpa7yhMAEwPru7hsTIr7sk44CAsPWNC8'
+
+const supabase = createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+)
 
 const form = document.getElementById('waitlist-form')
-const spotsLeftElement = document.getElementById('spots-left')
+const steppersCountElement = document.getElementById('steppers-count')
 const successMessage = document.getElementById('success-message')
 
-const MAX_SPOTS = 100
+
+/* =========================
+   STEPPER COUNTER
+========================= */
 
 async function updateCounter() {
 
   const { count, error } = await supabase
     .from('waitlist')
-    .select('*', { count: 'exact', head: true })
+    .select('*', {
+      count: 'exact',
+      head: true
+    })
 
   if (error) {
     console.error(error)
     return
   }
 
-  const spotsLeft = Math.max(MAX_SPOTS - count, 0)
-
-  if (spotsLeft <= 0) {
-
-    const counterWrapper = document.querySelector('.counter-wrapper')
-
-    counterWrapper.innerHTML = `
-      <p class="waitlist-message">
-        The first 100 spots have been claimed.
-        <br><br>
-        <strong>You can still join the waitlist below.</strong>
-        <br><br>
-        If demand is strong, we may expand access to Beta 2. If we do, you'll be among the first people we contact. 
-        <br><br>
-        Otherwise, we'll keep you updated on the official Moneystep launch.
-      </p>
-    `
-
-  } else {
-
-    spotsLeftElement.textContent = spotsLeft
-
-  }
+  steppersCountElement.textContent = count || 0
 }
 
 updateCounter()
+
+
+/* =========================
+   FORM SUBMISSION
+========================= */
 
 form.addEventListener('submit', async (e) => {
 
@@ -80,8 +74,12 @@ form.addEventListener('submit', async (e) => {
     ])
 
   if (error) {
+
     console.error(error)
-    successMessage.textContent = 'Something went wrong. Please try again.'
+
+    successMessage.textContent =
+      'Something went wrong. Please try again.'
+
     return
   }
 
@@ -97,21 +95,45 @@ form.addEventListener('submit', async (e) => {
 
 })
 
+
+/* =========================
+   LEADERBOARD MODAL
+========================= */
+
 const leaderboardLink = document.getElementById('leaderboard-link')
+const leaderboardLinkFaq = document.getElementById('leaderboard-link-faq')
+
 const leaderboardModal = document.getElementById('leaderboard-modal')
 const modalClose = document.querySelector('.modal-close')
 
-leaderboardLink.addEventListener('click', (e) => {
+
+function openLeaderboard(e) {
+
   e.preventDefault()
+
   leaderboardModal.classList.add('show')
-})
+}
+
+
+leaderboardLink.addEventListener('click', openLeaderboard)
+
+leaderboardLinkFaq.addEventListener('click', openLeaderboard)
+
 
 modalClose.addEventListener('click', () => {
+
   leaderboardModal.classList.remove('show')
+
 })
 
+
 leaderboardModal.addEventListener('click', (e) => {
+
   if (e.target === leaderboardModal) {
+
     leaderboardModal.classList.remove('show')
+
   }
+
 })
+```

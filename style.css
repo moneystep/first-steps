@@ -1,6 +1,8 @@
+```css
 /* =========================
    RESET
 ========================= */
+
 html {
   scroll-behavior: smooth;
 }
@@ -116,7 +118,7 @@ h1 {
   opacity: 0.9;
 }
 
-#spots-left {
+#steppers-count {
   font-weight: 700;
   font-size: 1.2rem;
 }
@@ -359,12 +361,14 @@ button:hover {
   cursor: pointer;
 }
 
-#leaderboard-link {
+#leaderboard-link,
+#leaderboard-link-faq {
   color: #FFD700;
   text-decoration: none;
   font-weight: 600;
 }
 
-#leaderboard-link:hover {
+#leaderboard-link:hover,
+#leaderboard-link-faq:hover {
   opacity: 0.8;
 }
