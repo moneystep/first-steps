@@ -2,7 +2,7 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 
 const SUPABASE_URL = 'https://tfhtaqdbqfmuntwdszzj.supabase.co'
 
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRmaHRhcWRicWZtd2RzenpqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2MTc1MDYsImV4cCI6MjA5NDE5MzUwNn0.eWluoqyPr74jpa7yhMAEwPru7hsTIr7sk44CAsPWNC8'
+const SUPABASE_ANON_KEY = 'sb_publishable_YIQiTPe7aSLMp2AOKs1eyQ_IxnKvTYm'
 
 const supabase = createClient(
   SUPABASE_URL,
@@ -21,7 +21,7 @@ const successMessage = document.getElementById('success-message')
 async function updateCounter() {
 
   const { count, error } = await supabase
-    .from('waitlist')
+    .from('launch_waitlist')
     .select('*', {
       count: 'exact',
       head: true
@@ -55,10 +55,9 @@ form.addEventListener('submit', async (e) => {
   const phone = formData.get('phone')
   const social = formData.get('social')
   const platform = formData.get('platform')
-  const identity = formData.get('identity')
 
   const { error } = await supabase
-    .from('waitlist')
+    .from('launch_waitlist')
     .insert([
       {
         name,
@@ -67,8 +66,7 @@ form.addEventListener('submit', async (e) => {
         state,
         phone,
         social,
-        platform,
-        identity
+        platform
       }
     ])
 
@@ -83,9 +81,9 @@ form.addEventListener('submit', async (e) => {
   }
 
   successMessage.innerHTML = `
-    You secured your spot.
+    You're on the list.
     <br><br>
-    Keep an eye on your inbox. We'll email instructions from hello@moneystep.app closer to the challenge start date.
+    We'll keep you updated as Moneystep gets closer to launch.
   `
 
   form.reset()
