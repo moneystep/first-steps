@@ -63,7 +63,7 @@ body {
 
 .learn-more a {
   color: #fff;
-  text-decoration: none;
+  text-decoration: underline;
   opacity: 0.85;
 }
 
@@ -79,7 +79,7 @@ body {
 
 .back-to-signup a {
   color: #fff;
-  text-decoration: none;
+  text-decoration: underline;
   opacity: 0.9;
 }
 
@@ -115,6 +115,12 @@ h1 {
 .counter-wrapper {
   margin-bottom: 28px;
   font-size: 1rem;
+  opacity: 0.9;
+}
+
+.total-steps-counter {
+  margin-bottom: 6px;
+  font-size: 0.95rem;
   opacity: 0.9;
 }
 
@@ -388,10 +394,25 @@ button:hover {
 
 .leaderboard-link {
   color: #FFD700;
-  text-decoration: none;
+  text-decoration: underline;
   font-weight: 600;
 }
 
 .leaderboard-link:hover {
+  opacity: 0.8;
+}
+
+.jump-link {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.payout-link {
+  color: #fff;
+  text-decoration: underline;
+  font-weight: inherit;
+}
+
+.payout-link:hover {
   opacity: 0.8;
 }
