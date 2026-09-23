@@ -11,7 +11,11 @@ const supabase = createClient(
 
 const form = document.getElementById('waitlist-form')
 const steppersCountElement = document.getElementById('steppers-count')
+const steppersWrapper = document.getElementById('steppers-wrapper')
 const successMessage = document.getElementById('success-message')
+
+// Signup counter stays hidden until this many people have joined.
+const SHOW_STEPPERS_AT = 110
 
 
 /* =========================
@@ -32,7 +36,13 @@ async function updateCounter() {
     return
   }
 
-  steppersCountElement.textContent = count || 0
+  const total = count || 0
+
+  steppersCountElement.textContent = total
+
+  if (total >= SHOW_STEPPERS_AT) {
+    steppersWrapper.hidden = false
+  }
 }
 
 updateCounter()
@@ -50,7 +60,6 @@ form.addEventListener('submit', async (e) => {
 
   const name = formData.get('name')
   const email = formData.get('email')
-  const city = formData.get('city')
   const state = formData.get('state')
   const phone = formData.get('phone')
   const social = formData.get('social')
@@ -62,7 +71,6 @@ form.addEventListener('submit', async (e) => {
       {
         name,
         email,
-        city,
         state,
         phone,
         social,

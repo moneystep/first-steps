@@ -98,6 +98,10 @@ h1 {
   margin-bottom: 28px;
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 /* =========================
    WAITLIST MESSAGE
 ========================= */
@@ -223,6 +227,42 @@ input:focus {
 
 input::placeholder {
   color: #888;
+}
+
+/* =========================
+   SELECTS
+========================= */
+
+select {
+  width: 100%;
+  background: #111;
+  border: 1px solid #222;
+  color: #fff;
+  padding: 16px;
+  padding-right: 44px;
+  border-radius: 14px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+}
+
+select:focus {
+  outline: none;
+  border-color: #fff;
+}
+
+select:invalid {
+  color: #888;
+}
+
+select option {
+  color: #fff;
+  background: #111;
 }
 
 /* =========================
@@ -393,7 +433,7 @@ button:hover {
 }
 
 .leaderboard-link {
-  color: #FFD700;
+  color: #fff;
   text-decoration: underline;
   font-weight: 600;
 }
