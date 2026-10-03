@@ -370,6 +370,29 @@ button:hover {
 }
 
 /* =========================
+   FOOTER LEGAL LINKS
+========================= */
+
+.footer-legal {
+  margin-top: 20px;
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+
+.footer-legal a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.footer-legal a:hover {
+  opacity: 0.8;
+}
+
+.footer-sep {
+  margin: 0 8px;
+}
+
+/* =========================
    MOBILE
 ========================= */
 
