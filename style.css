@@ -128,6 +128,10 @@ h1 {
   opacity: 0.9;
 }
 
+.total-steps-number {
+  font-weight: 700;
+}
+
 #steppers-count {
   font-weight: 700;
   font-size: 1.2rem;
@@ -478,4 +482,4 @@ button:hover {
 
 .payout-link:hover {
   opacity: 0.8;
-}
+}thes
