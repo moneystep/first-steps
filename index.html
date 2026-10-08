@@ -71,7 +71,7 @@
     <div class="counter-wrapper">
 
       <div class="total-steps-counter">
-        1,417,707 moneysteps and counting
+        <span class="total-steps-number">1,417,707</span> moneysteps and counting
       </div>
 
       <div id="steppers-wrapper" hidden>
@@ -99,8 +99,9 @@
 
       <div class="row">
 
-        <select name="state" required>
+        <select name="state" id="state-select" required>
           <option value="" disabled selected>State</option>
+          <option value="OTHER">Other Country</option>
           <option value="AL">Alabama</option>
           <option value="AK">Alaska</option>
           <option value="AZ">Arizona</option>
@@ -161,6 +162,14 @@
         </select>
 
       </div>
+
+      <input
+        type="text"
+        name="country"
+        id="country-input"
+        placeholder="Country"
+        hidden
+      />
 
       <input
         type="tel"

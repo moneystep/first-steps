@@ -13,9 +13,32 @@ const form = document.getElementById('waitlist-form')
 const steppersCountElement = document.getElementById('steppers-count')
 const steppersWrapper = document.getElementById('steppers-wrapper')
 const successMessage = document.getElementById('success-message')
+const stateSelect = document.getElementById('state-select')
+const countryInput = document.getElementById('country-input')
 
 // Signup counter stays hidden until this many people have joined.
 const SHOW_STEPPERS_AT = 110
+
+
+/* =========================
+   OTHER COUNTRY FIELD
+========================= */
+
+function updateCountryField() {
+
+  const isOther = stateSelect.value === 'OTHER'
+
+  countryInput.hidden = !isOther
+  countryInput.required = isOther
+
+  if (isOther) {
+    countryInput.focus()
+  } else {
+    countryInput.value = ''
+  }
+}
+
+stateSelect.addEventListener('change', updateCountryField)
 
 
 /* =========================
@@ -60,10 +83,19 @@ form.addEventListener('submit', async (e) => {
 
   const name = formData.get('name')
   const email = formData.get('email')
-  const state = formData.get('state')
   const phone = formData.get('phone')
   const social = formData.get('social')
   const platform = formData.get('platform')
+
+  // US picks store the two-letter code; "Other Country" stores the typed country.
+  const state = formData.get('state') === 'OTHER'
+    ? (formData.get('country') || '').trim()
+    : formData.get('state')
+
+  if (!state) {
+    countryInput.focus()
+    return
+  }
 
   const { error } = await supabase
     .from('launch_waitlist')
@@ -95,6 +127,8 @@ form.addEventListener('submit', async (e) => {
   `
 
   form.reset()
+
+  updateCountryField()
 
   updateCounter()
 
