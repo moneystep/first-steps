@@ -10,6 +10,7 @@ const supabase = createClient(
 )
 
 const form = document.getElementById('waitlist-form')
+const submitButton = document.getElementById('submit-button')
 const steppersCountElement = document.getElementById('steppers-count')
 const steppersWrapper = document.getElementById('steppers-wrapper')
 const successMessage = document.getElementById('success-message')
@@ -18,6 +19,35 @@ const countryInput = document.getElementById('country-input')
 
 // Signup counter stays hidden until this many people have joined.
 const SHOW_STEPPERS_AT = 110
+
+
+/* =========================
+   NOTICE POPUP
+========================= */
+
+const noticeOverlay = document.getElementById('notice-overlay')
+const noticeIcon = document.getElementById('notice-icon')
+const noticeTitle = document.getElementById('notice-title')
+const noticeBody = document.getElementById('notice-body')
+const noticeEmail = document.getElementById('notice-email')
+const noticeHint = document.getElementById('notice-hint')
+const noticeClose = document.getElementById('notice-close')
+
+function showNotice({ icon, title, body, email = '', hint = '' }) {
+  noticeIcon.className = `fas ${icon}`
+  noticeTitle.textContent = title
+  noticeBody.textContent = body
+  noticeEmail.textContent = email
+  noticeHint.textContent = hint
+  noticeOverlay.hidden = false
+  noticeClose.focus()
+}
+
+function hideNotice() {
+  noticeOverlay.hidden = true
+}
+
+noticeClose.addEventListener('click', hideNotice)
 
 
 /* =========================
@@ -47,19 +77,14 @@ stateSelect.addEventListener('change', updateCountryField)
 
 async function updateCounter() {
 
-  const { count, error } = await supabase
-    .from('launch_waitlist')
-    .select('*', {
-      count: 'exact',
-      head: true
-    })
+  const { data, error } = await supabase.rpc('waitlist_count')
 
   if (error) {
     console.error('Counter error:', error)
     return
   }
 
-  const total = count || 0
+  const total = Number(data) || 0
 
   steppersCountElement.textContent = total
 
@@ -81,12 +106,6 @@ form.addEventListener('submit', async (e) => {
 
   const formData = new FormData(form)
 
-  const name = formData.get('name')
-  const email = formData.get('email')
-  const phone = formData.get('phone')
-  const social = formData.get('social')
-  const platform = formData.get('platform')
-
   // US picks store the two-letter code; "Other Country" stores the typed country.
   const state = formData.get('state') === 'OTHER'
     ? (formData.get('country') || '').trim()
@@ -97,42 +116,133 @@ form.addEventListener('submit', async (e) => {
     return
   }
 
-  const { error } = await supabase
-    .from('launch_waitlist')
-    .insert([
-      {
-        name,
-        email,
-        state,
-        phone,
-        social,
-        platform
-      }
-    ])
+  const payload = {
+    name: formData.get('name'),
+    email: formData.get('email'),
+    state,
+    platform: formData.get('platform'),
+    phone: formData.get('phone'),
+    social: formData.get('social')
+  }
 
-  if (error) {
+  successMessage.textContent = ''
+  submitButton.disabled = true
+  submitButton.textContent = 'Sending...'
 
-    console.error('Supabase error:', error)
+  const { data, error } = await supabase.functions.invoke('waitlist-signup', {
+    body: payload
+  })
+
+  submitButton.disabled = false
+  submitButton.textContent = 'Count me in'
+
+  if (error || !data || !data.status) {
+
+    console.error('Signup error:', error)
 
     successMessage.textContent =
-      'Something went wrong. Please try again.'
+      'Something went wrong. Please check your email address and try again.'
 
     return
   }
 
-  successMessage.innerHTML = `
-    You're on the list.
-    <br><br>
-    We'll keep you updated as Moneystep gets closer to launch.
-  `
-
   form.reset()
-
   updateCountryField()
 
-  updateCounter()
+  if (data.status === 'already') {
+
+    showNotice({
+      icon: 'fa-circle-check',
+      title: "You're already on the list",
+      body: 'This email is already confirmed. Nothing else to do.',
+      email: data.email
+    })
+
+  } else if (data.status === 'queued') {
+
+    showNotice({
+      icon: 'fa-envelope-open-text',
+      title: 'Check your email',
+      body: "Your confirmation email is on its way and will arrive within 24 hours. You're not on the list until you click the link inside.",
+      email: data.email,
+      hint: "Don't see it? Check your spam or promotions folder."
+    })
+
+  } else {
+
+    showNotice({
+      icon: 'fa-envelope-open-text',
+      title: 'Check your email',
+      body: "We just sent you a confirmation link. You're not on the list until you click it.",
+      email: data.email,
+      hint: "Don't see it in a few minutes? Check your spam or promotions folder."
+    })
+
+  }
 
 })
+
+
+/* =========================
+   EMAIL CONFIRMATION LINK
+========================= */
+
+async function handleConfirmLink() {
+
+  const params = new URLSearchParams(window.location.search)
+  const token = params.get('confirm')
+
+  if (!token) return
+
+  // Clean the token out of the address bar.
+  window.history.replaceState({}, '', window.location.pathname)
+
+  const { data, error } = await supabase.functions.invoke('waitlist-confirm', {
+    body: { token }
+  })
+
+  if (error || !data) {
+
+    showNotice({
+      icon: 'fa-triangle-exclamation',
+      title: 'Something went wrong',
+      body: 'We could not confirm your email right now. Please try the link again in a minute.',
+      hint: 'Still stuck? Email hello@moneystep.app'
+    })
+
+    return
+  }
+
+  if (data.status === 'confirmed') {
+
+    showNotice({
+      icon: 'fa-circle-check',
+      title: "You're on the list!",
+      body: "Your email is confirmed. We'll keep you updated as Moneystep gets closer to launch."
+    })
+
+    updateCounter()
+
+  } else if (data.status === 'already') {
+
+    showNotice({
+      icon: 'fa-circle-check',
+      title: 'Already confirmed',
+      body: "You're already on the list. Nothing else to do."
+    })
+
+  } else {
+
+    showNotice({
+      icon: 'fa-triangle-exclamation',
+      title: 'Link not valid',
+      body: 'This confirmation link is invalid or expired. Sign up again below and we will send a new one.'
+    })
+
+  }
+}
+
+handleConfirmLink()
 
 
 /* =========================
@@ -182,6 +292,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
 
     leaderboardModal.classList.remove('show')
+    hideNotice()
 
   }
 

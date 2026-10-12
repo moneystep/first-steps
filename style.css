@@ -290,6 +290,12 @@ button:hover {
   transform: translateY(-1px);
 }
 
+button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+  transform: none;
+}
+
 /* =========================
    SUCCESS MESSAGE
 ========================= */
@@ -482,4 +488,87 @@ button:hover {
 
 .payout-link:hover {
   opacity: 0.8;
-}thes
+}
+
+/* =========================
+   NOTICE POPUP (check your email / confirmed)
+========================= */
+
+.notice-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.notice-overlay[hidden] {
+  display: none;
+}
+
+.notice-card {
+  width: 100%;
+  max-width: 440px;
+  background: #0d0d0d;
+  border: 2px solid #8cff95;
+  border-radius: 24px;
+  padding: 40px 28px 32px;
+  text-align: center;
+  box-shadow: 0 0 60px rgba(140, 255, 149, 0.25);
+  animation: notice-pop 0.25s ease-out;
+}
+
+@keyframes notice-pop {
+  from { transform: scale(0.92); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.notice-icon {
+  font-size: 3.5rem;
+  color: #8cff95;
+  margin-bottom: 18px;
+}
+
+.notice-title {
+  font-size: clamp(1.6rem, 6vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+
+.notice-body {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  opacity: 0.95;
+}
+
+.notice-email {
+  margin-top: 14px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #8cff95;
+  word-break: break-all;
+}
+
+.notice-email:empty,
+.notice-hint:empty {
+  display: none;
+}
+
+.notice-hint {
+  margin-top: 14px;
+  font-size: 0.9rem;
+  opacity: 0.7;
+  line-height: 1.5;
+}
+
+.notice-button {
+  width: 100%;
+  margin-top: 28px;
+  font-size: 1.05rem;
+}

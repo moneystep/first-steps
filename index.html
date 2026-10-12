@@ -183,7 +183,7 @@
         placeholder="Social Media Handle (Optional)"
       />
 
-      <button type="submit">
+      <button type="submit" id="submit-button">
         Count me in
       </button>
 
@@ -269,6 +269,28 @@
       src="moneystep-beta-1-leaderboard.png"
       alt="Moneystep Beta 1 Leaderboard"
     />
+
+  </div>
+
+  <div id="notice-overlay" class="notice-overlay" hidden>
+
+    <div class="notice-card" role="dialog" aria-modal="true" aria-labelledby="notice-title">
+
+      <div class="notice-icon">
+        <i id="notice-icon" class="fas fa-envelope-open-text"></i>
+      </div>
+
+      <h2 id="notice-title" class="notice-title"></h2>
+
+      <p id="notice-body" class="notice-body"></p>
+
+      <p id="notice-email" class="notice-email"></p>
+
+      <p id="notice-hint" class="notice-hint"></p>
+
+      <button type="button" id="notice-close" class="notice-button">Got it</button>
+
+    </div>
 
   </div>
 
