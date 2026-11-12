@@ -6,6 +6,11 @@
 
   <title>Moneystep</title>
 
+  <meta name="description" content="Moneystep turns everyday steps into challenges with real cash payouts. Download on the App Store." />
+
+  <!-- Shows Safari's "Open in App Store" banner on iPhone -->
+  <meta name="apple-itunes-app" content="app-id=6822037178" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -24,49 +29,10 @@
   <main class="container">
 
     <img
-      src="MoneyStepLogo.png"
-      alt="MoneyStep Logo"
-      class="logo"
+      src="app-screenshot.png"
+      alt="Moneystep app showing a challenge leaderboard and cash payouts"
+      class="app-screenshot"
     />
-
-    <p class="learn-more">
-      New to Money<span class="step-green">step</span>?
-      <a href="#faq">Learn more ↓</a>
-    </p>
-
-    <h1 id="signup">
-
-      Your steps already count.
-
-      <br>
-
-      Now make them matter.
-
-      <br><br>
-
-      <span class="nowrap">Step into a challenge,</span>
-      <br>
-      <span class="nowrap">earn your <a href="#" class="payout-link leaderboard-link">payout</a>.</span>
-
-      <br><br>
-
-      We go live in Fall 2026.
-
-      <br>
-
-      Want in? <a href="#waitlist-form" class="jump-link">Say so below</a>.
-
-    </h1>
-
-    <div class="platform-section">
-
-      <p class="platform-label">
-        Available for iOS.
-        <br>
-        Android supported only with Garmin.
-      </p>
-
-    </div>
 
     <div class="counter-wrapper">
 
@@ -74,12 +40,42 @@
         <span class="total-steps-number">1,417,707</span> moneysteps and counting
       </div>
 
-      <div id="steppers-wrapper" hidden>
-        <span id="steppers-count">0</span>
-        <span>ready to step</span>
-      </div>
+    </div>
+
+
+    <div class="download-section">
+
+      <a
+        href="https://apps.apple.com/app/id6822037178"
+        class="app-store-button"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i class="fab fa-apple"></i>
+        <span>Download on the App Store</span>
+      </a>
+
+      <a
+        href="https://play.google.com/apps/testing/com.moneystep.app"
+        class="android-link"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i class="fab fa-android"></i>
+        <span>Android supported only with Garmin</span>
+      </a>
 
     </div>
+
+        <p class="learn-more">
+      New to Money<span class="step-green">step</span>?
+      <a href="#faq">Learn more ↓</a>
+    </p>
+
+
+    <p class="newsletter-intro">
+      Keep up with challenges. Sign up for the newsletter.
+    </p>
 
     <form id="waitlist-form" class="waitlist-form">
 
@@ -184,7 +180,7 @@
       />
 
       <button type="submit" id="submit-button">
-        Count me in
+        Sign me up
       </button>
 
     </form>
@@ -222,7 +218,9 @@
 
     <p class="back-to-signup">
       <a href="#waitlist-form">
-        Want in? Say so above ↑
+        Want challenge updates? 
+        <br>
+        Sign up for the newsletter above ↑
       </a>
     </p>
 

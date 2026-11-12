@@ -11,14 +11,11 @@ const supabase = createClient(
 
 const form = document.getElementById('waitlist-form')
 const submitButton = document.getElementById('submit-button')
-const steppersCountElement = document.getElementById('steppers-count')
-const steppersWrapper = document.getElementById('steppers-wrapper')
 const successMessage = document.getElementById('success-message')
 const stateSelect = document.getElementById('state-select')
 const countryInput = document.getElementById('country-input')
 
-// Signup counter stays hidden until this many people have joined.
-const SHOW_STEPPERS_AT = 110
+const SUBMIT_LABEL = 'Sign me up'
 
 
 /* =========================
@@ -72,31 +69,6 @@ stateSelect.addEventListener('change', updateCountryField)
 
 
 /* =========================
-   STEPPER COUNTER
-========================= */
-
-async function updateCounter() {
-
-  const { data, error } = await supabase.rpc('waitlist_count')
-
-  if (error) {
-    console.error('Counter error:', error)
-    return
-  }
-
-  const total = Number(data) || 0
-
-  steppersCountElement.textContent = total
-
-  if (total >= SHOW_STEPPERS_AT) {
-    steppersWrapper.hidden = false
-  }
-}
-
-updateCounter()
-
-
-/* =========================
    FORM SUBMISSION
 ========================= */
 
@@ -134,7 +106,7 @@ form.addEventListener('submit', async (e) => {
   })
 
   submitButton.disabled = false
-  submitButton.textContent = 'Count me in'
+  submitButton.textContent = SUBMIT_LABEL
 
   if (error || !data || !data.status) {
 
@@ -153,7 +125,7 @@ form.addEventListener('submit', async (e) => {
 
     showNotice({
       icon: 'fa-circle-check',
-      title: "You're already on the list",
+      title: "You're already subscribed",
       body: 'This email is already confirmed. Nothing else to do.',
       email: data.email
     })
@@ -163,7 +135,7 @@ form.addEventListener('submit', async (e) => {
     showNotice({
       icon: 'fa-envelope-open-text',
       title: 'Check your email',
-      body: "Your confirmation email is on its way and will arrive within 24 hours. You're not on the list until you click the link inside.",
+      body: "Your confirmation email is on its way and will arrive within 24 hours. You're not subscribed until you click the link inside.",
       email: data.email,
       hint: "Don't see it? Check your spam or promotions folder."
     })
@@ -173,7 +145,7 @@ form.addEventListener('submit', async (e) => {
     showNotice({
       icon: 'fa-envelope-open-text',
       title: 'Check your email',
-      body: "We just sent you a confirmation link. You're not on the list until you click it.",
+      body: "We just sent you a confirmation link. You're not subscribed until you click it.",
       email: data.email,
       hint: "Don't see it in a few minutes? Check your spam or promotions folder."
     })
@@ -217,18 +189,16 @@ async function handleConfirmLink() {
 
     showNotice({
       icon: 'fa-circle-check',
-      title: "You're on the list!",
-      body: "Your email is confirmed. We'll keep you updated as Moneystep gets closer to launch."
+      title: "You're subscribed!",
+      body: "Your email is confirmed. We'll keep you posted on new challenges and Moneystep news."
     })
-
-    updateCounter()
 
   } else if (data.status === 'already') {
 
     showNotice({
       icon: 'fa-circle-check',
       title: 'Already confirmed',
-      body: "You're already on the list. Nothing else to do."
+      body: "You're already subscribed. Nothing else to do."
     })
 
   } else {

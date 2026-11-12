@@ -46,9 +46,10 @@ body {
 ========================= */
 
 .logo {
-  width: 360px;
+  width: 200px;
+  max-width: 60vw;
   height: auto;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   filter: drop-shadow(0 0 20px rgba(255,255,255,0.08));
 }
 
@@ -88,28 +89,80 @@ body {
 }
 
 /* =========================
-   HEADLINE
+   DOWNLOAD BUTTONS
 ========================= */
 
-h1 {
-  font-size: clamp(1.4rem, 4.5vw, 1.7rem);
-  font-weight: 600;
-  line-height: 1.4;
-  margin-bottom: 28px;
+.download-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
 }
 
-.nowrap {
-  white-space: nowrap;
+.app-store-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 340px;
+  padding: 16px 24px;
+  border-radius: 14px;
+  background: #fff;
+  color: #000;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.app-store-button i {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.app-store-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 28px rgba(140, 255, 149, 0.35);
+}
+
+.android-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-size: 0.95rem;
+  opacity: 0.85;
+  text-decoration: none;
+}
+
+.android-link span {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.android-link i {
+  font-size: 1.1rem;
+  color: #8cff95;
+}
+
+.android-link:hover {
+  opacity: 1;
 }
 
 /* =========================
-   WAITLIST MESSAGE
+   APP SCREENSHOT
 ========================= */
 
-.waitlist-message {
-  font-size: 1rem;
-  line-height: 1.6;
-  opacity: 0.9;
+.app-screenshot {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 24px;
+  border-radius: 28px;
+  filter: drop-shadow(0 0 40px rgba(140, 255, 149, 0.15));
 }
 
 /* =========================
@@ -117,13 +170,12 @@ h1 {
 ========================= */
 
 .counter-wrapper {
-  margin-bottom: 28px;
+  margin-bottom: 24px;
   font-size: 1rem;
   opacity: 0.9;
 }
 
 .total-steps-counter {
-  margin-bottom: 6px;
   font-size: 0.95rem;
   opacity: 0.9;
 }
@@ -132,9 +184,15 @@ h1 {
   font-weight: 700;
 }
 
-#steppers-count {
-  font-weight: 700;
-  font-size: 1.2rem;
+/* =========================
+   NEWSLETTER INTRO
+========================= */
+
+.newsletter-intro {
+  margin-bottom: 18px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
 /* =========================
@@ -151,62 +209,6 @@ h1 {
 .row {
   display: flex;
   gap: 14px;
-}
-
-.platform-section {
-  text-align: center;
-  margin-top: 4px;
-}
-
-.platform-label {
-  margin-bottom: 14px;
-  font-size: 0.95rem;
-  opacity: 0.9;
-}
-
-.platform-options {
-  display: flex;
-  gap: 24px;
-  justify-content: center;
-}
-
-.platform-options label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.95rem;
-  cursor: pointer;
-}
-
-.platform-options input[type="radio"] {
-  width: 18px;
-  height: 18px;
-  margin: 0;
-  padding: 0;
-  accent-color: white;
-}
-
-.identity-options {
-  display: flex;
-  gap: 24px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.identity-options label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.95rem;
-  cursor: pointer;
-}
-
-.identity-options input[type="radio"] {
-  width: 18px;
-  height: 18px;
-  margin: 0;
-  padding: 0;
-  accent-color: white;
 }
 
 /* =========================
@@ -413,20 +415,11 @@ button:disabled {
   }
 
   .logo {
-    width: 330px;
-    max-width: 90vw;
+    width: 170px;
   }
 
   .row {
     gap: 14px;
-  }
-
-}
-
-@media (max-width: 360px) {
-
-  .logo {
-    width: 290px;
   }
 
 }
@@ -472,21 +465,6 @@ button:disabled {
 }
 
 .leaderboard-link:hover {
-  opacity: 0.8;
-}
-
-.jump-link {
-  color: inherit;
-  text-decoration: underline;
-}
-
-.payout-link {
-  color: #fff;
-  text-decoration: underline;
-  font-weight: inherit;
-}
-
-.payout-link:hover {
   opacity: 0.8;
 }
 
