@@ -22,6 +22,15 @@
   />
 
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    .android-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+  </style>
 </head>
 
 <body>
@@ -55,19 +64,19 @@
         <span>Download on the App Store</span>
       </a>
 
-      <a
-        href="https://play.google.com/apps/testing/com.moneystep.app"
-        class="android-link"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <i class="fab fa-android"></i>
-        <span>Android supported only with Garmin</span>
-      </a>
+      <div class="android-block">
+        <a href="#waitlist-form" class="android-link">
+          <i class="fab fa-android"></i>
+          <span>Android supported only with Garmin</span>
+        </a>
+        <a href="#waitlist-form" class="android-link">
+          <span>Fill out the form below</span>
+        </a>
+      </div>
 
     </div>
 
-        <p class="learn-more">
+    <p class="learn-more">
       New to Money<span class="step-green">step</span>?
       <a href="#faq">Learn more ↓</a>
     </p>
@@ -218,7 +227,7 @@
 
     <p class="back-to-signup">
       <a href="#waitlist-form">
-        Want challenge updates? 
+        Want challenge updates?
         <br>
         Sign up for the newsletter above ↑
       </a>

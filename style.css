@@ -550,3 +550,15 @@ button:disabled {
   margin-top: 28px;
   font-size: 1.05rem;
 }
+
+.android-note {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  opacity: 0.85;
+  max-width: 320px;
+}
+
+.android-note a {
+  color: #fff;
+  text-decoration: underline;
+}
